@@ -14,7 +14,8 @@ class ThreePageState extends State<ThreePage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: AppBar(
+      appBar:AppBar(
+        backgroundColor: Colors.orangeAccent,
         title: Text("三月"),
       ),
       body: SingleChildScrollView(

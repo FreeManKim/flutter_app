@@ -12,8 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/ui/five.dart';
 import 'package:flutter_app/ui/four.dart';
 import 'package:flutter_app/ui/one.dart';
-import 'package:flutter_app/ui/three.dart';
-import 'package:flutter_app/ui/two.dart';
+import 'package:flutter_app/ui/three/three.dart';
+import 'package:flutter_app/ui/two/two.dart';
 
 const int ThemeColor = 0xFFC91B3A;
 

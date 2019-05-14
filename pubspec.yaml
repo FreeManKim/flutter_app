@@ -54,6 +54,14 @@ flutter:
   - assets/QQL.png
   - assets/wechat1.png
   - assets/wechatL.png
+  fonts:
+  - family: PikaPika
+    fonts:
+    - asset: fonts/FangZhengPiKaPiKa-2.ttf
+  - family: CaoShu
+    fonts:
+    - asset: fonts/FangYuanJiFengCaoShu-2.ttf
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg

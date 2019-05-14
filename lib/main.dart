@@ -2,12 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bottomTab/AppPage.dart';
-import 'package:flutter_app/bottomTab/BottomNavigationWidget.dart';
-import 'package:flutter_app/ui/five.dart';
-import 'package:flutter_app/ui/four.dart';
-import 'package:flutter_app/ui/one.dart';
-import 'package:flutter_app/ui/three.dart';
-import 'package:flutter_app/ui/two.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'title',
       theme: new ThemeData(
-        primaryColor: Colors.yellow,
+        primaryColor: Colors.teal,
         backgroundColor: Color(0xFFEFEFEF),
         accentColor: Color(0xFF888888),
         textTheme: TextTheme(

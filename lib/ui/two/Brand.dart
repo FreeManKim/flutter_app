@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'two_brand_item_Widget.dart';
+
 class Brand extends StatelessWidget{
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -16,6 +19,7 @@ class Brand extends StatelessWidget{
                     Image.network(
                       "http://image.fosunholiday.com/foliday/app3/brand/ic_brand_clubmed.png",
                     ),
+//                    TwoBrandWidget("http://image.fosunholiday.com/foliday/app3/brand/ic_brand_clubmed.png","asdasda"),
                     Row(
                       children: <Widget>[
                         Expanded(

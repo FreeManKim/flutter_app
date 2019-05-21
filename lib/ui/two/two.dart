@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'Brand.dart';
-import 'TwoListItemWidget.dart';
+import 'package:flutter_app/ui/two/TwoListItemWidget.dart';
 
 class TwoPage extends StatefulWidget {
   @override
@@ -72,7 +72,7 @@ class TwoPageState extends State<TwoPage> {
             ],
           ),
           new Brand(),
-          new TwoItem("1","1"),
+          new TwoItem(),
         ],
       ),
     );

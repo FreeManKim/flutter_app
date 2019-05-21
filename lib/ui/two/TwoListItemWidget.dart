@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class TwoItem extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => new TwoItemState();
-  TwoItem(String key1,String value);
+  TwoItem();
 }
 
 class TwoItemState extends State<TwoItem> {
@@ -21,6 +21,7 @@ class TwoItemState extends State<TwoItem> {
           splashColor: Colors.teal[100],
           onTap: () {
             print("this is InkWell onClik event ");
+//            _navigateToConverter(context);
           },
           child: Row(
             children: <Widget>[

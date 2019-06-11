@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'four.dart';
+
 class OnePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => OnePageState();
@@ -46,6 +48,9 @@ class OnePageState extends State<OnePage> {
                 fontSize: 18
             ),
           ),
+          FlatButton(onPressed: (){
+            Navigator.push(context, new MaterialPageRoute(builder: (context)=>new FourPage()));
+          }, child: Text("下一个"))
         ],
       ),
       floatingActionButton: new FloatingActionButton(

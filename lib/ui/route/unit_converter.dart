@@ -1,39 +1,40 @@
+// Copyright 2018 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 import 'package:flutter/material.dart';
-import 'package:flutter_app/api/api.dart' as api;
 import 'package:flutter_app/ui/two/Unit.dart';
 import 'package:meta/meta.dart';
-import 'package:flutter_app/utils/logUitl.dart' as Log;
 
 import 'MyCategory.dart';
 
+
+
+
 const _padding = EdgeInsets.all(16.0);
 
-/// [ConverterRoute] where users can input amounts to convert in one [Unit]
+/// [UnitConverter] where users can input amounts to convert in one [Unit]
 /// and retrieve the conversion in another [Unit] for a specific [Category].
-///
-/// While it is named ConverterRoute, a more apt name would be ConverterScreen,
-/// because it is responsible for the UI at the route's destination.
-class ConverterRoute extends StatefulWidget {
+class UnitConverter extends StatefulWidget {
+  /// The current [Category] for unit conversion.
   final MyCategory category;
 
-  /// This [ConverterRoute] requires the name, color, and units to not be null.
-  const ConverterRoute({
+  /// This [UnitConverter] takes in a [Category] with [Units]. It can't be null.
+  const UnitConverter({
     @required this.category,
   }) : assert(category != null);
 
   @override
-  _ConverterRouteState createState() => _ConverterRouteState();
+  _UnitConverterState createState() => _UnitConverterState();
 }
 
-class _ConverterRouteState extends State<ConverterRoute> {
+class _UnitConverterState extends State<UnitConverter> {
   Unit _fromValue;
   Unit _toValue;
   double _inputValue;
   String _convertedValue = '';
-  String _errorMessage = 'Oh no! We can not connect right now！';
   List<DropdownMenuItem> _unitMenuItems;
   bool _showValidationError = false;
-  bool _isShowError = false;
 
   @override
   void initState() {
@@ -43,7 +44,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
   }
 
   @override
-  void didUpdateWidget(ConverterRoute old) {
+  void didUpdateWidget(UnitConverter old) {
     super.didUpdateWidget(old);
     // We update our [DropdownMenuItem] units when we switch [Categories].
     if (old.category != widget.category) {
@@ -67,12 +68,12 @@ class _ConverterRouteState extends State<ConverterRoute> {
       ));
     }
     setState(() {
-      _isShowError = false;
       _unitMenuItems = newItems;
     });
   }
 
-  /// Sets the default values for the 'from' and 'to' [Dropdown]s.
+  /// Sets the default values for the 'from' and 'to' [Dropdown]s, and the
+  /// updated output value if a user had previously entered an input.
   void _setDefaults() {
     setState(() {
       _fromValue = widget.category.units[0];
@@ -97,25 +98,9 @@ class _ConverterRouteState extends State<ConverterRoute> {
   }
 
   void _updateConversion() {
-    var value = api.Api().covert(widget.category.name.toLowerCase(),
-        _fromValue.name, _toValue.name, _inputValue);
-    value.then((apiMould) {
-      Log.i("oye", apiMould.toJson());
-      setState(() {
-        _isShowError = false;
-        if (null == apiMould) {
-          _isShowError = true;
-          _errorMessage = "Oh no! apiMould maust not be null ！";
-        } else {
-          if (apiMould.status == "ok") {
-            _convertedValue = _format(apiMould.conversion);
-          } else {
-            _isShowError = true;
-            _errorMessage = apiMould.message[0];
-          }
-        }
-//          _format(_inputValue * (_toValue.conversion / _fromValue.conversion));
-      });
+    setState(() {
+      _convertedValue =
+          _format(_inputValue * (_toValue.conversion / _fromValue.conversion));
     });
   }
 
@@ -139,15 +124,9 @@ class _ConverterRouteState extends State<ConverterRoute> {
     });
   }
 
-  void _updateShowWidget(bool isShow) {
-    setState(() {
-      _isShowError = isShow;
-    });
-  }
-
   Unit _getUnit(String unitName) {
     return widget.category.units.firstWhere(
-      (Unit unit) {
+          (Unit unit) {
         return unit.name == unitName;
       },
       orElse: null,
@@ -273,55 +252,10 @@ class _ConverterRouteState extends State<ConverterRoute> {
         output,
       ],
     );
-    final errorWidget = SingleChildScrollView(
-      child: Container(
-        margin: _padding,
-        padding: _padding,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.0),
-            color: widget.category.color),
-        child: InkWell(
-            onTap: () => {
-              _updateShowWidget(false),
-            },
-            child:Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.error_outline,
-                  size: 180.0,
-                  color: Colors.white,
-                ),
-                Text(
-                  "点击重试！",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline.copyWith(
-                    color: Colors.white,
-                  ),
-                ),
-                Text(
-                  _errorMessage,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline.copyWith(
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            )
-        ),
-      ),
-    );
 
-    var showWidget = Padding(
+    return Padding(
       padding: _padding,
-      child: SingleChildScrollView(
-        child: converter,
-      ),
+      child: converter,
     );
-    if (_isShowError)
-      return errorWidget;
-    else
-      return showWidget;
   }
 }

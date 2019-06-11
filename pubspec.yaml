@@ -15,7 +15,7 @@ description: Frist Flutter application.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -24,6 +24,8 @@ dependencies:
   transparent_image: ^1.0.0
   cached_network_image: ^0.7.0
   shared_preferences: ^0.4.3
+  json_annotation: ^2.4.0
+
 
 
 
@@ -37,7 +39,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  build_runner: ^1.5.2
+  json_serializable: ^3.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
@@ -50,17 +53,19 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-  - assets/QQ1.png
-  - assets/QQL.png
-  - assets/wechat1.png
-  - assets/wechatL.png
+    - assets/goofy_units.json
+    - assets/regular_units.json
+    - assets/QQ1.png
+    - assets/QQL.png
+    - assets/wechat1.png
+    - assets/wechatL.png
   fonts:
-  - family: PikaPika
-    fonts:
-    - asset: fonts/FangZhengPiKaPiKa-2.ttf
-  - family: CaoShu
-    fonts:
-    - asset: fonts/FangYuanJiFengCaoShu-2.ttf
+    - family: PikaPika
+      fonts:
+        - asset: fonts/FangZhengPiKaPiKa-2.ttf
+    - family: CaoShu
+      fonts:
+        - asset: fonts/FangYuanJiFengCaoShu-2.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:
